@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +19,7 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
-      overflow-y: auto; /* 允許畫面滑動 */
+      overflow-y: auto; /* Fixes scrolling issue */
     }
 
     .card {
@@ -97,8 +97,10 @@
       background-color: #e9ecef;
       color: #495057;
       position: relative;
-      z-index: 999;
+      z-index: 9999;
       white-space: nowrap;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .success-screen {
@@ -113,7 +115,7 @@
 <body>
 
   <div class="card">
-    <!-- 主詢問區塊 -->
+    <!-- Main Question View -->
     <div id="questionScreen">
       <h1 id="questionText">Will you be my valentine? 💕</h1>
       <div class="subtitle">(There is only one correct answer.)</div>
@@ -124,11 +126,14 @@
 
       <div class="btn-group" id="btnGroup">
         <button class="btn-yes" onclick="acceptProposal()">YES 💗</button>
-        <button class="btn-no" id="noBtn" onmouseover="handleNoInteraction()" onclick="handleNoInteraction()" ontouchstart="handleNoInteraction()">NO 😈</button>
+        <button class="btn-no" id="noBtn" 
+                onmouseover="handleNoInteraction()" 
+                onclick="handleNoInteraction()" 
+                ontouchstart="handleNoInteraction()">NO 😈</button>
       </div>
     </div>
 
-    <!-- 成功區塊 -->
+    <!-- Success View -->
     <div class="success-screen" id="successScreen">
       <div class="img-container">
         <img src="hyena_yes.png" alt="YAYYYYY! I knew you'd say yes!" />
@@ -141,7 +146,6 @@
     const questionText = document.getElementById('questionText');
     let attempt = 0;
 
-    // 按鈕更換文字清單
     const noMessages = [
       "No way! 😜",
       "Nice try! 😂",
@@ -152,33 +156,30 @@
     function handleNoInteraction() {
       attempt++;
 
-      // 1. 強制更改按鈕文字
+      // 1. Change button text
       if (attempt === 1) {
-        noBtn.innerText = noMessages[0];
+        noBtn.innerHTML = noMessages[0];
       } else if (attempt === 2) {
-        noBtn.innerText = noMessages[1];
+        noBtn.innerHTML = noMessages[1];
       } else if (attempt === 3) {
-        noBtn.innerText = noMessages[2];
+        noBtn.innerHTML = noMessages[2];
       } else {
-        noBtn.innerText = noMessages[3];
+        noBtn.innerHTML = noMessages[3];
       }
 
-      // 2. 移動位置
+      // 2. Change position and jump
       noBtn.style.position = 'fixed';
 
       if (attempt === 1) {
-        // 第一次：往左移
         const currentRect = noBtn.getBoundingClientRect();
-        noBtn.style.left = Math.max(20, currentRect.left - 150) + 'px';
+        noBtn.style.left = Math.max(20, currentRect.left - 120) + 'px';
         noBtn.style.top = currentRect.top + 'px';
       } 
       else if (attempt === 2) {
-        // 第二次：跳到頂端
-        noBtn.style.top = '50px';
+        noBtn.style.top = '60px';
       } 
       else {
-        // 第三次以上：變小 + 全螢幕隨機飛
-        const currentScale = Math.max(0.3, 1 - (attempt - 2) * 0.15);
+        const currentScale = Math.max(0.4, 1 - (attempt - 2) * 0.15);
         noBtn.style.transform = 'scale(' + currentScale + ')';
 
         const padding = 60;
@@ -192,7 +193,7 @@
         noBtn.style.top = randomY + 'px';
       }
 
-      // 3. 嘗試 4 次以上更換上方主標題
+      // 3. Update main title after 4 tries
       if (attempt >= 4) {
         questionText.innerText = "You really thought I would let you say no? 😭";
       }
