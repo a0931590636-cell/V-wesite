@@ -19,7 +19,7 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
-      overflow-y: auto; /* 允許滑動 */
+      overflow-y: auto; /* 允許上下滑動 */
     }
 
     .card {
@@ -97,8 +97,10 @@
       background-color: #e9ecef;
       color: #495057;
       position: relative;
-      z-index: 1;
-      white-space: nowrap; /* 防止文字換行 */
+      z-index: 10;
+      white-space: nowrap; /* 避免文字換行 */
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .success-screen {
@@ -124,7 +126,10 @@
 
       <div class="btn-group" id="btnGroup">
         <button class="btn-yes" onclick="acceptProposal()">YES 💗</button>
-        <button class="btn-no" id="noBtn" onmouseover="handleNoInteraction()" onclick="handleNoInteraction()">NO 😈</button>
+        <button class="btn-no" id="noBtn" 
+                onmouseover="handleNoInteraction(event)" 
+                onclick="handleNoInteraction(event)" 
+                ontouchstart="handleNoInteraction(event)">NO 😈</button>
       </div>
     </div>
 
@@ -141,7 +146,7 @@
     const questionText = document.getElementById('questionText');
     let attempt = 0;
 
-    // 定義 NO 按鈕每次變化的文字陣列
+    // 定義按鈕每次變換的文字內容
     const noMessages = [
       "No way! 😜",
       "Nice try! 😂",
@@ -149,13 +154,18 @@
       "Are you sure? 😭"
     ];
 
-    function handleNoInteraction() {
+    function handleNoInteraction(event) {
+      if (event) {
+        event.preventDefault(); // 防止手機重複觸發事件
+      }
+
       attempt++;
 
-      // 更換按鈕文字（超過陣列長度就固定最後一個）
+      // 1. 更換按鈕文字
       const messageIndex = Math.min(attempt - 1, noMessages.length - 1);
-      noBtn.innerText = noMessages[messageIndex];
+      noBtn.textContent = noMessages[messageIndex];
 
+      // 2. 改變定位並移動按鈕
       noBtn.style.position = 'fixed';
 
       if (attempt === 1) {
@@ -184,7 +194,7 @@
         noBtn.style.top = `${randomY}px`;
       }
 
-      // 多次嘗試後更換主標題文字
+      // 3. 嘗試 4 次以上時更換上方主標題
       if (attempt >= 4) {
         questionText.innerText = "You really thought I would let you say no? 😭";
       }
