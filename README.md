@@ -112,14 +112,14 @@
 <body>
 
   <div class="card">
-    <!-- Main Question View -->
+    <!-- 詢問主頁面 -->
     <div id="questionScreen">
       <h1 id="questionText">Will you be my valentine? 💕</h1>
       <div class="subtitle">(There is only one correct answer.)</div>
 
       <div class="img-container">
-        <!-- Question Photo: hyena_ask -->
-        <img src="https://i.imgur.com/BHitwmt_d.webp?maxwidth=760&fidelity=grand" alt="Hyena with Rose" />
+        <!-- 詢問圖片：hyena_ask 乾淨直連網址 -->
+        <img src="https://i.imgur.com/BHitwmt.png" alt="Hyena with Rose" />
       </div>
 
       <div class="btn-group" id="btnGroup">
@@ -128,11 +128,11 @@
       </div>
     </div>
 
-    <!-- Success View after clicking YES -->
+    <!-- 點擊 YES 轉跳後的成功頁面 -->
     <div class="success-screen" id="successScreen">
       <div class="img-container">
-        <!-- Celebration Photo: hyena_yes -->
-        <img src="https://i.imgur.com/dBslnP1_d.webp?maxwidth=760&fidelity=grand" alt="YAYYYYY! I knew you'd say yes!" />
+        <!-- ⚠️ 請將下方的網址替換成第二張圖片 (hyena_yes) 複製出來的直連網址 (例如：https://i.imgur.com/xxxx.png) -->
+        <img src="https://i.imgur.com/你的第二張成功圖片ID.png" alt="YAYYYYY! I knew you'd say yes!" />
       </div>
     </div>
   </div>
