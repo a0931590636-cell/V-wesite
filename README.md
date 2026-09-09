@@ -100,7 +100,6 @@
       z-index: 1;
     }
 
-    /* 成功畫面：直接展示賀卡 */
     .success-screen {
       display: none;
     }
@@ -113,13 +112,13 @@
 <body>
 
   <div class="card">
-    <!-- 提問主畫面 -->
+    <!-- Main Question View -->
     <div id="questionScreen">
       <h1 id="questionText">Will you be my valentine? 💕</h1>
       <div class="subtitle">(There is only one correct answer.)</div>
 
       <div class="img-container">
-        <!-- 詢問照片已改為 PNG 檔 -->
+        <!-- Question Photo: hyena_ask -->
         <img src="https://imgur.com/a/pXd3Rrf" alt="Hyena with Rose" />
       </div>
 
@@ -129,10 +128,10 @@
       </div>
     </div>
 
-    <!-- 點擊 YES 轉跳後的最終賀卡頁面 -->
+    <!-- Success View after clicking YES -->
     <div class="success-screen" id="successScreen">
       <div class="img-container">
-        <!-- 慶祝照片已改為 PNG 檔 -->
+        <!-- Celebration Photo: hyena_yes -->
         <img src="https://imgur.com/a/z4xI6hS" alt="YAYYYYY! I knew you'd say yes!" />
       </div>
     </div>
@@ -149,17 +148,14 @@
       noBtn.style.position = 'fixed';
 
       if (attempt === 1) {
-        // 第一次：往左移動
         const currentRect = noBtn.getBoundingClientRect();
         noBtn.style.left = `${Math.max(20, currentRect.left - 150)}px`;
         noBtn.style.top = `${currentRect.top}px`;
       } 
       else if (attempt === 2) {
-        // 第二次：跳到上方
         noBtn.style.top = '50px';
       } 
       else {
-        // 第三次以上：變小 + 全螢幕隨機跳躍
         const currentScale = Math.max(0.3, 1 - (attempt - 2) * 0.15);
         noBtn.style.transform = `scale(${currentScale})`;
 
@@ -174,7 +170,6 @@
         noBtn.style.top = `${randomY}px`;
       }
 
-      // 多次嘗試後更換文字
       if (attempt >= 4) {
         questionText.innerText = "You really thought I would let you say no? 😭";
       }
