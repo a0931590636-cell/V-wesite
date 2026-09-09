@@ -119,7 +119,7 @@
 
       <div class="img-container">
         <!-- Question Photo: hyena_ask -->
-        <img src="https://imgur.com/a/pXd3Rrf" alt="Hyena with Rose" />
+        <img src="https://i.imgur.com/BHitwmt_d.webp?maxwidth=760&fidelity=grand" alt="Hyena with Rose" />
       </div>
 
       <div class="btn-group" id="btnGroup">
@@ -132,7 +132,7 @@
     <div class="success-screen" id="successScreen">
       <div class="img-container">
         <!-- Celebration Photo: hyena_yes -->
-        <img src="https://imgur.com/a/z4xI6hS" alt="YAYYYYY! I knew you'd say yes!" />
+        <img src="https://i.imgur.com/dBslnP1_d.webp?maxwidth=760&fidelity=grand" alt="YAYYYYY! I knew you'd say yes!" />
       </div>
     </div>
   </div>
