@@ -11,16 +11,16 @@
       padding: 0;
     }
 
-body {
-  background-color: #fcf6f0;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  overflow-y: auto; /* ✅ 改成 auto，當畫面超出手機螢幕時就能順暢滑動 */
-}
+    body {
+      background-color: #fcf6f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-y: auto; /* 允許滑動 */
+    }
 
     .card {
       background: #fffbf7;
@@ -98,6 +98,7 @@ body {
       color: #495057;
       position: relative;
       z-index: 1;
+      white-space: nowrap; /* 防止文字換行 */
     }
 
     .success-screen {
@@ -112,13 +113,12 @@ body {
 <body>
 
   <div class="card">
-    <!-- Main Question View -->
+    <!-- 詢問主畫面 -->
     <div id="questionScreen">
       <h1 id="questionText">Will you be my valentine? 💕</h1>
       <div class="subtitle">(There is only one correct answer.)</div>
 
       <div class="img-container">
-        <!-- Question Photo PNG -->
         <img src="hyena_ask.png" alt="Hyena with Rose" />
       </div>
 
@@ -128,10 +128,9 @@ body {
       </div>
     </div>
 
-    <!-- Success View -->
+    <!-- 點擊 YES 轉跳後的最終頁面 -->
     <div class="success-screen" id="successScreen">
       <div class="img-container">
-        <!-- Celebration Photo PNG -->
         <img src="hyena_yes.png" alt="YAYYYYY! I knew you'd say yes!" />
       </div>
     </div>
@@ -142,20 +141,35 @@ body {
     const questionText = document.getElementById('questionText');
     let attempt = 0;
 
+    // 定義 NO 按鈕每次變化的文字陣列
+    const noMessages = [
+      "No way! 😜",
+      "Nice try! 😂",
+      "Wrong button! 🥺",
+      "Are you sure? 😭"
+    ];
+
     function handleNoInteraction() {
       attempt++;
+
+      // 更換按鈕文字（超過陣列長度就固定最後一個）
+      const messageIndex = Math.min(attempt - 1, noMessages.length - 1);
+      noBtn.innerText = noMessages[messageIndex];
 
       noBtn.style.position = 'fixed';
 
       if (attempt === 1) {
+        // 第一次：往左移動
         const currentRect = noBtn.getBoundingClientRect();
         noBtn.style.left = `${Math.max(20, currentRect.left - 150)}px`;
         noBtn.style.top = `${currentRect.top}px`;
       } 
       else if (attempt === 2) {
+        // 第二次：跳到上方
         noBtn.style.top = '50px';
       } 
       else {
+        // 第三次以上：變小 + 全螢幕隨機跳躍
         const currentScale = Math.max(0.3, 1 - (attempt - 2) * 0.15);
         noBtn.style.transform = `scale(${currentScale})`;
 
@@ -170,6 +184,7 @@ body {
         noBtn.style.top = `${randomY}px`;
       }
 
+      // 多次嘗試後更換主標題文字
       if (attempt >= 4) {
         questionText.innerText = "You really thought I would let you say no? 😭";
       }
