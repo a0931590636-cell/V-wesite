@@ -11,16 +11,16 @@
       padding: 0;
     }
 
-    body {
-      background-color: #fcf6f0;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      overflow: hidden;
-    }
+body {
+  background-color: #fcf6f0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-y: auto; /* ✅ 改成 auto，當畫面超出手機螢幕時就能順暢滑動 */
+}
 
     .card {
       background: #fffbf7;
