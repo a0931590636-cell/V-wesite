@@ -120,7 +120,7 @@
 
       <div class="img-container">
         <!-- 詢問照片已改為 PNG 檔 -->
-        <img src="hyena_ask.PNG" alt="Hyena with Rose" />
+        <img src="https://imgur.com/a/pXd3Rrf" alt="Hyena with Rose" />
       </div>
 
       <div class="btn-group" id="btnGroup">
@@ -133,7 +133,7 @@
     <div class="success-screen" id="successScreen">
       <div class="img-container">
         <!-- 慶祝照片已改為 PNG 檔 -->
-        <img src="hyena_yes.PNG" alt="YAYYYYY! I knew you'd say yes!" />
+        <img src="https://imgur.com/a/z4xI6hS" alt="YAYYYYY! I knew you'd say yes!" />
       </div>
     </div>
   </div>
